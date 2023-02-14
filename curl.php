@@ -7,7 +7,8 @@ $ch = curl_init();
 //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
 $headers = [
-    "Authorization: Client-ID z0rmkzaAxt2xALtk1GL9AL6BusPbRaDzWkE41apl6Jo"
+    "Authorization: token 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",
+//    "User-Agent: Sigroy",
 ];
 
 $response_headers = [];
@@ -28,12 +29,21 @@ $header_callback = function (CurlHandle $ch, string $header) use (&$response_hea
 
 };
 
+$body = json_encode([
+    "name" => "Created from API",
+    "description" => "an example API-created repo"
+]);
+
 curl_setopt_array($ch, [
-    CURLOPT_URL => "https://api.unsplash.com/photos/random",
+    CURLOPT_URL => "https://api.github.com/user/repos",
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_HTTPHEADER => $headers,
+    CURLOPT_USERAGENT => "Sigroy",
 //    CURLOPT_HEADER => true,
-    CURLOPT_HEADERFUNCTION => $header_callback,
+//    CURLOPT_HEADERFUNCTION => $header_callback,
+//    CURLOPT_CUSTOMREQUEST => "POST",
+//    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => $body,
 ]);
 
 $response = curl_exec($ch);
@@ -47,8 +57,8 @@ curl_close($ch);
 
 echo $status_code . "<br>";
 
-echo '<pre>';
-print_r($response_headers);
-echo '</pre>';
+//echo '<pre>';
+//print_r($response_headers);
+//echo '</pre>';
 
 echo $response . "<br>";
