@@ -1,5 +1,8 @@
 {
     "require": {
-        "guzzlehttp/guzzle": "^7.5"
+        "guzzlehttp/guzzle": "^7.5",
+      "ext-curl": "*",
+      "ext-mbstring": "*",
+        "stripe/stripe-php": "^10.6"
     }
 }
